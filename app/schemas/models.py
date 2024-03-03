@@ -20,7 +20,7 @@ class BaseItem(BaseModel):
     publication_date: datetime
     government_activity: str
     content: str
-    sentiment_indicator: SentimentIndicator
+    sentiment_indicator: SentimentIndicator = None
     related_products: list[str] = None
 
 
