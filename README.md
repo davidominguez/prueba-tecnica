@@ -25,4 +25,4 @@ To run the application just run ````docker compose up -d```.
 
 
 ### URLs of the services
- [Swagger](localhost:8000/docs)
+- Swagger: http://localhost:8000/docs
