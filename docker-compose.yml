@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build: ./app
+    env_file: .env.sample
+    volumes:
+      - ./app:/app
+    networks:
+      - omnios_net
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    env_file: .env.sample
+    environment:
+      - "MONGO_INITDB_DATABASE=${MONGO_DB}"
+      - "MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}"
+      - "MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASS}"
+    restart: always
+    networks:
+      - omnios_net
+    volumes:
+      - ./db_data:/data/db
+    command:
+      mongod --quiet --logpath /dev/null
+
+networks:
+  omnios_net:
+    name: omnios_net
